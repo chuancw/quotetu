@@ -8,4 +8,13 @@ class QuotesSpider(scrapy.Spider):
     start_urls = ['http://quotes.toscrape.com/']
 
     def parse(self, response):
-        print(response.text)
+        quotes = response.css('.quote')
+        for quote in quotes:
+            text = quote.css('.text::text').extract_first()
+            author = quote.css('.author::text').extract_first()
+            tags = quote.css('.tags .tag::text').extract()
+
+
+
+
+
